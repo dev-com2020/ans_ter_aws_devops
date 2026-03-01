@@ -1,0 +1,31 @@
+---
+- name: Aktualizacja apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Instalacja podstawowych pakietów
+  apt:
+    name:
+      - curl
+      - git
+      - unzip
+      - htop
+      - ufw
+      - fail2ban
+    state: present
+
+- name: Konfiguracja UFW – zezwól SSH
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+
+- name: Włącz UFW
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: Ustaw timezone
+  timezone:
+    name: Europe/Warsaw

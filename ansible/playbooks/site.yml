@@ -1,0 +1,13 @@
+---
+- name: Common setup dla wszystkich maszyn
+  hosts: all
+  become: yes
+  roles:
+    - common
+
+- name: Konfiguracja serwerów webowych
+  hosts: role_webserver
+  become: yes
+  roles:
+    - nginx
+    - app
